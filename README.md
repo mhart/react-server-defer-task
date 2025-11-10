@@ -80,6 +80,7 @@ Other runtimes see large impact too:
 
 - Bun on Next.js 16: 1.41x – 1.77x
 - Deno on Next.js 16: 1.2x – 1.37x
+- workerd on Next.js 16: 1.33x – 1.66x
 
 ## Full Results
 
@@ -121,3 +122,6 @@ Other runtimes see large impact too:
 
 - Deno 2.5.6, single-threaded, 158ms (3200) -> 12800 = 132ms (1.2x), 18500 = 117ms (1.35x), 65100 = 116ms (1.36x)
 - Deno 2.5.6, multi-threaded, 1.49s (3200) -> 12800 = 1.22s (1.22x), 18500 = 1.12s (1.33x), 65100 = 1.09s (1.37x)
+
+- workerd 2025-11-09, single-threaded, 3200 = 186ms -> 12800 = 133ms (1.4x), 18500 = 115ms (1.62x), 65100 = 112ms (1.66x)
+- workerd 2025-11-09, 10 concurrents, 3200 = 1.79s -> 12800 = 1.35s (1.33x), 18500 = 1.16s (1.54x), 65100 = 1.1s (1.63x)
