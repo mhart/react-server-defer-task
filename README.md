@@ -55,9 +55,9 @@ wrk -d30 http://localhost:3000
 ```
 
 - Avg w/ `MAX_ROW_SIZE=3200`: 2.29s (default setting)
-- Avg w/ `MAX_ROW_SIZE=12800`: 1.54s (1.49x faster)
-- Avg w/ `MAX_ROW_SIZE=18500`: 1.27s (1.8x faster)
-- Avg w/ `MAX_ROW_SIZE=65100`: 1.19s (1.92x faster)
+- Avg w/ `MAX_ROW_SIZE=12800`: 1.54s (**1.49x** faster)
+- Avg w/ `MAX_ROW_SIZE=18500`: 1.27s (**1.8x** faster)
+- Avg w/ `MAX_ROW_SIZE=65100`: 1.19s (**1.92x** faster)
 
 With `node --single-threaded` to simulate a single core (like on Lambda) and then running a single request at a time (1 thread, 1 connection):
 
@@ -66,21 +66,21 @@ wrk -c1 -t1 -d30 http://localhost:3000
 ```
 
 - Avg w/ `MAX_ROW_SIZE=3200`: 253ms (default setting)
-- Avg w/ `MAX_ROW_SIZE=12800`: 170ms (1.49x faster)
-- Avg w/ `MAX_ROW_SIZE=18500`: 140ms (1.81x faster)
-- Avg w/ `MAX_ROW_SIZE=65100`: 125ms (2.02x faster)
+- Avg w/ `MAX_ROW_SIZE=12800`: 170ms (**1.49x** faster)
+- Avg w/ `MAX_ROW_SIZE=18500`: 140ms (**1.81x** faster)
+- Avg w/ `MAX_ROW_SIZE=65100`: 125ms (**2.02x** faster)
 
 Other runtimes see large impact too:
 
-- Bun on Next.js 15: 1.5x – 2.04x
-- Deno on Next.js 15: 1.47x – 2.3x
-- workerd on Next.js 15: 1.84x – 2.67x
+- Bun on Next.js 15: **1.5x** – **2.04x**
+- Deno on Next.js 15: **1.47x** – **2.3x**
+- workerd on Next.js 15: **1.84x** – **2.67x**
 
-**NB:** On Next.js 16, the results are less pronounced though still non-trivial, in the 1.26x – 1.52x range on Node.js for latest canary (16.0.2-canary.12).
+**NB:** On Next.js 16, the results are less pronounced though still non-trivial, in the **1.26x** – **1.52x** range on Node.js for latest canary (16.0.2-canary.12).
 
-- Bun on Next.js 16: 1.41x – 1.77x
-- Deno on Next.js 16: 1.2x – 1.37x
-- workerd on Next.js 16: 1.33x – 1.66x
+- Bun on Next.js 16: **1.41x** – **1.77x**
+- Deno on Next.js 16: **1.2x** – **1.37x**
+- workerd on Next.js 16: **1.33x** – **1.66x**
 
 ## Full Results
 
@@ -88,40 +88,40 @@ Other runtimes see large impact too:
 
 ### Next.js 15.5.6
 
-- Node.js 22.21.1, single-threaded, 3200 = 253ms -> 12800 = 170ms (1.49x), 18500 = 140ms (1.81x), 65100 = 125ms (2.02x)
-- Node.js 22.21.1, 10 concurrents, 3200 = 2.29s -> 12800 = 1.54s (1.49x), 18500 = 1.27s (1.8x), 65100 = 1.19s (1.92x)
+- Node.js 22.21.1, single-threaded, 3200 = 253ms -> 12800 = 170ms (**1.49x**), 18500 = 140ms (**1.81x**), 65100 = 125ms (**2.02x**)
+- Node.js 22.21.1, 10 concurrents, 3200 = 2.29s -> 12800 = 1.54s (**1.49x**), 18500 = 1.27s (**1.8x**), 65100 = 1.19s (**1.92x**)
 
-- Node.js 24.11.0, single-threaded, 3200 = 213ms -> 12800 = 147ms (1.45x), 18500 = 134ms (1.59x), 65100 = 122ms (1.75x)
-- Node.js 24.11.0, 10 concurrents, 3200 = 1.94s -> 12800 = 1.42s (1.37x), 18500 = 1.23s (1.58x), 65100 = 1.2s (1.62x)
+- Node.js 24.11.0, single-threaded, 3200 = 213ms -> 12800 = 147ms (**1.45x**), 18500 = 134ms (**1.59x**), 65100 = 122ms (**1.75x**)
+- Node.js 24.11.0, 10 concurrents, 3200 = 1.94s -> 12800 = 1.42s (**1.37x**), 18500 = 1.23s (**1.58x**), 65100 = 1.2s (**1.62x**)
 
-- Node.js 25.1.0, single-threaded, 3200 = 208ms -> 12800 = 149ms (1.4x), 18500 = 130ms (1.6x), 65100 = 120ms (1.73x)
-- Node.js 25.1.0, 10 concurrents, 3200 = 1.86s -> 12800 = 1.39s (1.34x), 18500 = 1.2s (1.55x), 65100 = 1.16s (1.6x)
+- Node.js 25.1.0, single-threaded, 3200 = 208ms -> 12800 = 149ms (**1.4x**), 18500 = 130ms (**1.6x**), 65100 = 120ms (**1.73x**)
+- Node.js 25.1.0, 10 concurrents, 3200 = 1.86s -> 12800 = 1.39s (**1.34x**), 18500 = 1.2s (**1.55x**), 65100 = 1.16s (**1.6x**)
 
-- Bun 1.3.2, "single-threaded", 3200 = 143ms -> 12800 = 93ms (1.54x), 18500 = 77ms (1.86x), 65100 = 70ms (2.04x)
-- Bun 1.3.2, 10 concurrents, 3200 = 1.42s -> 12800 = 946ms (1.5x), 18500 = 792ms (1.79x), 65100 = 722ms (1.97x)
+- Bun 1.3.2, "single-threaded", 3200 = 143ms -> 12800 = 93ms (**1.54x**), 18500 = 77ms (**1.86x**), 65100 = 70ms (**2.04x**)
+- Bun 1.3.2, 10 concurrents, 3200 = 1.42s -> 12800 = 946ms (**1.5x**), 18500 = 792ms (**1.79x**), 65100 = 722ms (**1.97x**)
 
-- Deno 2.5.6, single-threaded, 3200 = 264ms -> 12800 = 161ms (1.64x), 18500 = 136ms (1.94x), 65100 = 115ms (2.3x)
-- Deno 2.5.6, 10 concurrents, 3200 = 2.15s -> 12800 = 1.46s (1.47x), 18500 = 1.17s (1.84x), 65100 = 1.12s (1.92x)
+- Deno 2.5.6, single-threaded, 3200 = 264ms -> 12800 = 161ms (**1.64x**), 18500 = 136ms (**1.94x**), 65100 = 115ms (**2.3x**)
+- Deno 2.5.6, 10 concurrents, 3200 = 2.15s -> 12800 = 1.46s (**1.47x**), 18500 = 1.17s (**1.84x**), 65100 = 1.12s (**1.92x**)
 
-- workerd 2025-11-09, single-threaded, 3200 = 312ms -> 12800 = 166ms (1.88x), 18500 = 126ms (2.48x), 65100 = 117ms (2.67x)
-- workerd 2025-11-09, 10 concurrents, 3200 = 3.05s -> 12800 = 1.66s (1.84x), 18500 = 1.29s (2.36x), 65100 = 1.18s (2.58x)
+- workerd 2025-11-09, single-threaded, 3200 = 312ms -> 12800 = 166ms (**1.88x**), 18500 = 126ms (**2.48x**), 65100 = 117ms (**2.67x**)
+- workerd 2025-11-09, 10 concurrents, 3200 = 3.05s -> 12800 = 1.66s (**1.84x**), 18500 = 1.29s (**2.36x**), 65100 = 1.18s (**2.58x**)
 
 ### Next.js 16.0.2-canary.12
 
-- Node.js 22.21.1, single-threaded, 210ms (3200) -> 12800 = 167ms (1.26x), 18500 = 142ms (1.48x), 65100 = 143ms (1.47x)
-- Node.js 22.21.1, multi-threaded, 1.82s (3200) -> 12800 = 1.45s (1.26x), 18500 = 1.29s (1.41x), 65100 = 1.2s (1.52x)
+- Node.js 22.21.1, single-threaded, 210ms (3200) -> 12800 = 167ms (**1.26x**), 18500 = 142ms (**1.48x**), 65100 = 143ms (**1.47x**)
+- Node.js 22.21.1, multi-threaded, 1.82s (3200) -> 12800 = 1.45s (**1.26x**), 18500 = 1.29s (**1.41x**), 65100 = 1.2s (**1.52x**)
 
-- Node.js 24.11.0, single-threaded, 180ms (3200) -> 12800 = 144ms (1.25x), 18500 = 128ms (1.41x), 65100 = 125ms (1.44x)
-- Node.js 24.11.0, multi-threaded, 1.58s (3200) -> 12800 = 1.31s (1.21x), 18500 = 1.2s (1.32x), 65100 = 1.14s (1.39x)
+- Node.js 24.11.0, single-threaded, 180ms (3200) -> 12800 = 144ms (**1.25x**), 18500 = 128ms (**1.41x**), 65100 = 125ms (**1.44x**)
+- Node.js 24.11.0, multi-threaded, 1.58s (3200) -> 12800 = 1.31s (**1.21x**), 18500 = 1.2s (**1.32x**), 65100 = 1.14s (**1.39x**)
 
-- Node.js 25.1.0, single-threaded, 177ms (3200) -> 12800 = 144ms (1.22x), 18500 = 130ms (1.36x), 65100 = 126ms (1.4x)
-- Node.js 25.1.0, multi-threaded, 1.57s (3200) -> 12800 = 1.33s (1.18x), 18500 = 1.19s (1.32x), 65100 = 1.18s (1.33x)
+- Node.js 25.1.0, single-threaded, 177ms (3200) -> 12800 = 144ms (**1.22x**), 18500 = 130ms (**1.36x**), 65100 = 126ms (**1.4x**)
+- Node.js 25.1.0, multi-threaded, 1.57s (3200) -> 12800 = 1.33s (**1.18x**), 18500 = 1.19s (**1.32x**), 65100 = 1.18s (**1.33x**)
 
-- Bun 1.3.2, "single-threaded", 122ms (3200) -> 12800 = 84ms (1.45x), 18500 = 73ms (1.67x), 65100 = 69ms (1.77x)
-- Bun 1.3.2, "multi-threaded", 1.18s (3200) -> 12800 = 837ms (1.41x), 18500 = 747ms (1.58x), 65100 = 701ms (1.68x)
+- Bun 1.3.2, "single-threaded", 122ms (3200) -> 12800 = 84ms (**1.45x**), 18500 = 73ms (**1.67x**), 65100 = 69ms (**1.77x**)
+- Bun 1.3.2, "multi-threaded", 1.18s (3200) -> 12800 = 837ms (**1.41x**), 18500 = 747ms (**1.58x**), 65100 = 701ms (**1.68x**)
 
-- Deno 2.5.6, single-threaded, 158ms (3200) -> 12800 = 132ms (1.2x), 18500 = 117ms (1.35x), 65100 = 116ms (1.36x)
-- Deno 2.5.6, multi-threaded, 1.49s (3200) -> 12800 = 1.22s (1.22x), 18500 = 1.12s (1.33x), 65100 = 1.09s (1.37x)
+- Deno 2.5.6, single-threaded, 158ms (3200) -> 12800 = 132ms (**1.2x**), 18500 = 117ms (**1.35x**), 65100 = 116ms (**1.36x**)
+- Deno 2.5.6, multi-threaded, 1.49s (3200) -> 12800 = 1.22s (**1.22x**), 18500 = 1.12s (**1.33x**), 65100 = 1.09s (**1.37x**)
 
-- workerd 2025-11-09, single-threaded, 3200 = 186ms -> 12800 = 133ms (1.4x), 18500 = 115ms (1.62x), 65100 = 112ms (1.66x)
-- workerd 2025-11-09, 10 concurrents, 3200 = 1.79s -> 12800 = 1.35s (1.33x), 18500 = 1.16s (1.54x), 65100 = 1.1s (1.63x)
+- workerd 2025-11-09, single-threaded, 3200 = 186ms -> 12800 = 133ms (**1.4x**), 18500 = 115ms (**1.62x**), 65100 = 112ms (**1.66x**)
+- workerd 2025-11-09, 10 concurrents, 3200 = 1.79s -> 12800 = 1.35s (**1.33x**), 18500 = 1.16s (**1.54x**), 65100 = 1.1s (**1.63x**)
