@@ -4,6 +4,8 @@ Based on [the Next.js benchmark from t3dotgg](https://github.com/t3dotgg/cf-vs-v
 
 This illustrates the impact of changing [the `MAX_ROW_SIZE` threshold used to determine whether to `deferTask` or not](https://github.com/facebook/react/blob/0fa32506dab4293dfffae662e181d2f970aa95ba/packages/react-server/src/ReactFlightServer.js#L3460-L3462) during flight stream serialization for rendering on the server.
 
+EDIT: Opened [a PR against React](https://github.com/facebook/react/pull/35089) to expose this as a configurable option.
+
 Changing this check essentially has a huge knock-on effect that removes a lot of the work involved in rendering large pages because these chunks are no longer lazy, so they don't need to be resolved later, thrown in deep pending stacks, reserialized, etc.
 
 This logic and value (`const MAX_ROW_SIZE = 3200`) were originally introduced in [#33030](https://github.com/facebook/react/pull/33030) to prevent large rows from blocking painting.
