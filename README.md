@@ -74,6 +74,7 @@ Other runtimes see large impact too:
 
 - Bun on Next.js 15: 1.5x – 2.04x
 - Deno on Next.js 15: 1.47x – 2.3x
+- workerd on Next.js 15: 1.84x – 2.67x
 
 **NB:** On Next.js 16, the results are less pronounced though still non-trivial, in the 1.26x – 1.52x range on Node.js for latest canary (16.0.2-canary.12).
 
@@ -100,6 +101,9 @@ Other runtimes see large impact too:
 
 - Deno 2.5.6, single-threaded, 3200 = 264ms -> 12800 = 161ms (1.64x), 18500 = 136ms (1.94x), 65100 = 115ms (2.3x)
 - Deno 2.5.6, 10 concurrents, 3200 = 2.15s -> 12800 = 1.46s (1.47x), 18500 = 1.17s (1.84x), 65100 = 1.12s (1.92x)
+
+- workerd 2025-11-09, single-threaded, 3200 = 312ms -> 12800 = 166ms (1.88x), 18500 = 126ms (2.48x), 65100 = 117ms (2.67x)
+- workerd 2025-11-09, 10 concurrents, 3200 = 3.05s -> 12800 = 1.66s (1.84x), 18500 = 1.29s (2.36x), 65100 = 1.18s (2.58x)
 
 ### Next.js 16.0.2-canary.12
 
