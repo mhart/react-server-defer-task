@@ -1,0 +1,21 @@
+{
+  "name": "react-server-defer-task",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack && sed -i '' -e '1s/^/const {MAX_ROW_SIZE}=process.env;/' -e 's/3200</MAX_ROW_SIZE</g' .next/standalone/node_modules/next/dist/compiled/next-server/app-page-turbo.runtime.prod.js",
+    "start": "MAX_ROW_SIZE=3200 NODE_ENV=production node .next/standalone/server.js"
+  },
+  "dependencies": {
+    "next": "15.5.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
